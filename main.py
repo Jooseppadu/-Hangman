@@ -10,3 +10,6 @@ class Hangman:
 if __name__ == '__main__':
     # TODO käsurea pealt andmebaasi faili lugemine
     Hangman()
+
+# If __name__ == '__main__':
+    # TODO

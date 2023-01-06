@@ -1,7 +1,9 @@
 import tkinter
+from datetime import datetime, timedelta
 from tkinter import *
 import tkinter.font as tkfont
 from PIL import Image, ImageTk
+from tkinter import ttk
 
 class View(Tk):
 
@@ -78,13 +80,16 @@ class View(Tk):
 
     def create_all_buttons(self):
         # esimene nupp, new game
-        btn_new = Button(self.frame_top, text='New Game', font=self.default_style)
+        btn_new = Button(self.frame_top, text='New Game', font=self.default_style,
+                         command=self.controller.click_button_new)
         # teine nupp, edetabel
-        Button(self.frame_top, text='Leaderboard', font=self.default_style).grid(row=0, column=1, padx=5, pady=2,
-                                                                                 sticky=EW)
+        Button(self.frame_top, text='Leaderboard', font=self.default_style,
+               command=self.controller.click_btn_leaderboard).grid(row=0, column=1, padx=5, pady=2, sticky=EW)
         # kolmas nupp, Loobu
-        btn_cancel = Button(self.frame_top, text='Cancel', font=self.default_style, state='disabled')
-        btn_send = Button(self.frame_top, text='Send', font=self.default_style,state='disabled')
+        btn_cancel = Button(self.frame_top, text='Cancel', font=self.default_style, state='disabled',
+                            command=self.controller.click_btn_cancel)
+        btn_send = Button(self.frame_top, text='Send', font=self.default_style,state='disabled',
+                          command=self.controller.click_btn_send)
         # place three button on frame
         btn_new.grid(row=0, column=0, padx=5, pady=2, sticky=EW)
         btn_cancel.grid(row=0, column=2, padx=5, pady=2, sticky=EW)
@@ -113,3 +118,62 @@ class View(Tk):
         char_input.grid(row=1, column=1, padx=5, pady=2)
 
         return char_input
+
+    def change_image(self, image_id):
+        self.image = ImageTk.PhotoImage(Image.open(self.model.image_files[image_id]))
+        self.label_image.configure(image=self.image)
+        self.label_image.image = self.image
+
+    def create_popup_window(self):
+        top = Toplevel(self)
+        top.geometry('500x180')
+        top.resizable(False, False)
+        top.grab_set()
+        top.focus()
+
+        frame = Frame(top)
+        frame.pack(expand=True, fill='both')
+        self.center(top)  # center on screen
+        return frame
+
+    def generate_leaderboard(self, frame, data):
+        # Table view
+        my_table = ttk.Treeview(frame)
+
+        # vertikaalne scrollbar
+        vsb = ttk.Scrollbar(frame, orient='vertical', command=my_table.yview)
+        vsb.pack(side='right', fill='y')
+        my_table.configure(yscrollcommand=vsb.set)
+
+        # veergude nimed
+        my_table['columns'] = ('date_time', 'name', 'word', 'misses', 'game_time')
+
+        #veergude omadused
+        my_table.column('#0', width=0, stretch=NO)
+        my_table.column('date_time', anchor=CENTER, width=90)
+        my_table.column('name', anchor=CENTER, width=80)
+        my_table.column('word', anchor=CENTER, width=80)
+        my_table.column('misses', anchor=CENTER, width=80)
+        my_table.column('game_time', anchor=CENTER, width=40)
+
+        # Table column heading
+
+        my_table.heading('#0', text='', anchor=CENTER)
+        my_table.heading('date_time', text='Date', anchor=CENTER)
+        my_table.heading('name', text='Date', anchor=CENTER)
+        my_table.heading('word', text='Date', anchor=CENTER)
+        my_table.heading('misses', text='Date', anchor=CENTER)
+        my_table.heading('game_time', text='Date', anchor=CENTER)
+
+        # add data into table
+        x = 0
+        for p in data:
+            # from file format to show format
+            dt = datetime.strptime(p.date, '%Y-%m-%d %H:%M:%S').strftime('%d.%m.%Y %T')
+            my_table.insert(parent='', index='end', iid=str(x), text='', values=(dt, p.name, p.word, p.misses,
+                                                                              str(timedelta(seconds=p.time))))
+
+
+            x += 1
+        my_table.pack(expand=True, fill='both')
+

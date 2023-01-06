@@ -3,7 +3,7 @@ from datetime import datetime
 
 class GameTime:
 
-    def __init__(self, label:time):
+    def __init__(self, label_time):
         self.label_time = label_time  # Label kus on aeg
         self.counter = 0 # second
         self.running = False
