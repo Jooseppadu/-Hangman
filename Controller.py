@@ -10,3 +10,4 @@ class Controller:
 
     def main(self):
         self.view.main()
+
