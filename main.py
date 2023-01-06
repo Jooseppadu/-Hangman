@@ -12,4 +12,4 @@ if __name__ == '__main__':
     Hangman()
 
 # If __name__ == '__main__':
-    # TODO
+    # TODO if letter inputed second time read as error
