@@ -27,7 +27,7 @@ class View(Tk):
         self.title('Hangman')       # akna üleval ääres olev nimi
         self.center(self)
 
-        # Teeme kaks frame
+        # Teeme kolm frame
         self.frame_top, self.frame_bottom, self.frame_image = self.create_two_frames()
 
         # Pildi teema lisamine
@@ -140,43 +140,45 @@ class View(Tk):
         return frame
 
     def generate_leaderboard(self, frame, data):
-        # Table view
-        my_table = ttk.Treeview(frame)
+        if len(data) > 0:
 
-        # vertikaalne scrollbar
-        vsb = ttk.Scrollbar(frame, orient='vertical', command=my_table.yview)
-        vsb.pack(side='right', fill='y')
-        my_table.configure(yscrollcommand=vsb.set)
+            # Table view
+            my_table = ttk.Treeview(frame)
 
-        # veergude nimed
-        my_table['columns'] = ('date_time', 'name', 'word', 'misses', 'game_time')
+            # vertikaalne scrollbar
+            vsb = ttk.Scrollbar(frame, orient='vertical', command=my_table.yview)
+            vsb.pack(side='right', fill='y')
+            my_table.configure(yscrollcommand=vsb.set)
 
-        #veergude omadused
-        my_table.column('#0', width=0, stretch=NO)
-        my_table.column('date_time', anchor=CENTER, width=90)
-        my_table.column('name', anchor=CENTER, width=80)
-        my_table.column('word', anchor=CENTER, width=80)
-        my_table.column('misses', anchor=CENTER, width=80)
-        my_table.column('game_time', anchor=CENTER, width=40)
+            # veergude nimed
+            my_table['columns'] = ('date_time', 'name', 'word', 'misses', 'game_time')
 
-        # Table column heading
+            #veergude omadused
+            my_table.column('#0', width=0, stretch=NO)
+            my_table.column('date_time', anchor=CENTER, width=90)
+            my_table.column('name', anchor=CENTER, width=80)
+            my_table.column('word', anchor=CENTER, width=80)
+            my_table.column('misses', anchor=CENTER, width=80)
+            my_table.column('game_time', anchor=CENTER, width=40)
 
-        my_table.heading('#0', text='', anchor=CENTER)
-        my_table.heading('date_time', text='Date', anchor=CENTER)
-        my_table.heading('name', text='Date', anchor=CENTER)
-        my_table.heading('word', text='Date', anchor=CENTER)
-        my_table.heading('misses', text='Date', anchor=CENTER)
-        my_table.heading('game_time', text='Date', anchor=CENTER)
+            # Table column heading
 
-        # add data into table
-        x = 0
-        for p in data:
-            # from file format to show format
-            dt = datetime.strptime(p.date, '%Y-%m-%d %H:%M:%S').strftime('%d.%m.%Y %T')
-            my_table.insert(parent='', index='end', iid=str(x), text='', values=(dt, p.name, p.word, p.misses,
-                                                                              str(timedelta(seconds=p.time))))
+            my_table.heading('#0', text='', anchor=CENTER)
+            my_table.heading('date_time', text='Date and Time', anchor=CENTER)
+            my_table.heading('name', text='Name', anchor=CENTER)
+            my_table.heading('word', text='Word', anchor=CENTER)
+            my_table.heading('misses', text='Misses', anchor=CENTER)
+            my_table.heading('game_time', text='Time', anchor=CENTER)
+
+            # add data into table
+            x = 0
+            for p in data:
+                # from file format to show format
+                dt = datetime.strptime(p.date, '%Y-%m-%d %H:%M:%S').strftime('%d.%m.%Y %T')
+                my_table.insert(parent='', index='end', iid=str(x), text='', values=(dt, p.name, p.word, p.misses,
+                                                                                  str(timedelta(seconds=p.time))))
 
 
-            x += 1
-        my_table.pack(expand=True, fill='both')
+                x += 1
+            my_table.pack(expand=True, fill='both')
 

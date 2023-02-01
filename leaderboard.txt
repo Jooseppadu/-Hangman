@@ -7,3 +7,9 @@
 2023-02-01 09:39:02;Ülo;Suzuki;E,W,E,O,A;34
 2023-02-01 09:44:02;eee;Toyota;D,D,W,W,W,W,W,W,W,W,E;17
 2023-02-01 09:44:06;eee;Toyota;D,D,W,W,W,W,W,W,W,W,E;17
+2023-02-01 10:29:05;oskar;BMW;b,m,s,d,w;14
+2023-02-01 10:42:39;Linda;Toyota;s,t,r,e,o,y,a;21
+2023-02-01 11:02:17;salli;Lasteaiaõpetaja;l,a,s,t,e,i,õ,p,j;45
+2023-02-01 11:03:38;k;Veoautojuht;k,e,o,a,u,t,j,h,w;30
+2023-02-01 11:10:10;t;Kasvuhoone;k,a,s,v,u,h,o,n,e;22
+2023-02-01 11:23:18;paul;Elumaja;e,l,u,m,a,t,j;21
