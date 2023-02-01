@@ -40,7 +40,7 @@ class Model:
 
     def get_user_input(self, userinput):
         if userinput:
-            user_char = userinput[:1].lower()  # Ainult esimesel tähel ja konverteerib väikesteks tähtedeks
+            user_char = userinput[:1].lower()
             if user_char in self.new_word.lower():
                 # Kui täht on õige
                 if user_char not in self.all_user_chars:
@@ -48,12 +48,12 @@ class Model:
                     self.change_user_input(user_char)  # Leidis tähe
                     self.all_user_chars.append(user_char)
                 else:
-                    # Kui täht on juba õige, loeb selle veana
+
                     self.counter += 1
             else:
                 # Kui täht on vale
                 if user_char not in self.all_user_chars:
-                    # Kui täht on esimest korda valesti sisestatud, lisab vead nimekirja ja suurendab veakontot
+
                     self.counter += 1
                     self.all_user_chars.append(user_char)
                 else:
