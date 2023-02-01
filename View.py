@@ -40,6 +40,9 @@ class View(Tk):
         self.lbl_error, self.lbl_time, self.lbl_result = self.create_all_labels()
         self.char_input = self.create_input_entry()
 
+        # Enter klahvi tööle panek
+        self.bind('<Return>', lambda event: self.controller.click_btn_send())
+
 
 
     def main(self):

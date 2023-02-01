@@ -40,12 +40,25 @@ class Model:
 
     def get_user_input(self, userinput):
         if userinput:
-           user_char = userinput[:1]  # ainult esimesel tähel
-           if user_char.lower() in self.new_word.lower():
-               self.change_user_input(user_char)   # leidis tähe
-           else:
-               self.counter += 1
-               self.all_user_chars.append(user_char.upper())
+            user_char = userinput[:1].lower()  # Ainult esimesel tähel ja konverteerib väikesteks tähtedeks
+            if user_char in self.new_word.lower():
+                # Kui täht on õige
+                if user_char not in self.all_user_chars:
+                    # Kui täht on esimest korda õige, lisab tähe kasutaja sisestatud tähtede hulka
+                    self.change_user_input(user_char)  # Leidis tähe
+                    self.all_user_chars.append(user_char)
+                else:
+                    # Kui täht on juba õige, loeb selle veana
+                    self.counter += 1
+            else:
+                # Kui täht on vale
+                if user_char not in self.all_user_chars:
+                    # Kui täht on esimest korda valesti sisestatud, lisab vead nimekirja ja suurendab veakontot
+                    self.counter += 1
+                    self.all_user_chars.append(user_char)
+                else:
+                    # Kui täht on juba valesti sisestatud, ei toimi midagi
+                    pass
 
     def change_user_input(self, user_char):
         # replace all _ with found letter
