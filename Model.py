@@ -57,8 +57,8 @@ class Model:
                     self.counter += 1
                     self.all_user_chars.append(user_char)
                 else:
-                    # Kui täht on juba valesti sisestatud, ei toimi midagi
-                    pass
+                    # Kui täht on juba valesti sisestatud, loeb selle uuesti veana
+                    self.counter += 1
 
     def change_user_input(self, user_char):
         # replace all _ with found letter
