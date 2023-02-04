@@ -44,9 +44,9 @@ class Model:
             if user_char in self.new_word.lower():
                 # Kui täht on õige
                 if user_char not in self.all_user_chars:
-                    # Kui täht on esimest korda õige, lisab tähe kasutaja sisestatud tähtede hulka
-                    self.change_user_input(user_char)  # Leidis tähe
-                    self.all_user_chars.append(user_char)
+                    self.change_user_input(user_char)
+                    # Siin oligi viga, üks rida koodi oli liiga palju :D
+
                 else:
 
                     self.counter += 1
